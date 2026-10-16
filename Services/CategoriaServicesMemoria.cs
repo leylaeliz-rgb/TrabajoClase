@@ -1,4 +1,5 @@
 ﻿using BackofficeApi.Dto;
+
 namespace BackofficeApi.Services
 {
     public class CategoriaServicesMemoria : ICategoriaService
@@ -8,21 +9,23 @@ namespace BackofficeApi.Services
             new () {Id= 1, Nombre= "Electrónica", Descripcion = "Dispositivos y accesorios"},
             new () {Id= 2, Nombre= "Libros", Descripcion = "Material de lectura"}
         ];
-    }
 
-    private readonly object _lock = new();
-    private int _siguienteId = 3;
-    public IEnumerable<CategoriaDto>Listar()
+        private readonly object _lock = new();
+        private int _siguienteId = 3;
+
+        public IEnumerable<CategoriaDto> Listar()
         {
-            lock (_lock) { return _categorias.ToList(); }//necesita ser administrada
+            lock (_lock) { return _categorias.ToList(); }
         }
-    public CategoriaDto? ObtenerId(int id)
+
+        public CategoriaDto? ObtenerPorId(int id)
         {
             lock (_lock) { return _categorias.FirstOrDefault(c => c.Id == id); }
         }
-    public CategoriaDto Crear(CategoriaCrearDto dto)
+
+        public CategoriaDto Crear(CategoriaCrearDto dto)
         {
-            lock (_lock) 
+            lock (_lock)
             {
                 var nueva = new CategoriaDto
                 {
@@ -34,5 +37,5 @@ namespace BackofficeApi.Services
                 return nueva;
             }
         }
-
-    }
+    } 
+} 

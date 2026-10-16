@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BackofficeApi.Controllers
 {
     [ApiController] // el proyecto sabe que con este controlador va a trabajar
-    [Route("api/[controller")]
+    [Route("api/[controller]")]
     public class CategoriaControllers : ControllerBase
     {
         private readonly ICategoriaService _service;
