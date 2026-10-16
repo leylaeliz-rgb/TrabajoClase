@@ -1,1 +1,13 @@
-.vs/ 
+# Archivos de usuario y configuraciones locales
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Carpetas de compilación e intermediarios
+bin/
+obj/
+
+# Herramientas de Visual Studio y Rider
+.vs/
+.idea/
