@@ -4,11 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Lee la cadena del JSON, si viene vacía usa la cadena explícita como respaldo (fallback)
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException("Falta la cadena de conexion DefaultConnection") ;
+    ?? "Server=127.0.0.1;Port=3306;Database=backoffice_db;Uid=backoffice_user;Pwd=ElijanUnaClaveSegura;SslMode=None;";
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    options.UseMySql(
+        connectionString,
+        new MySqlServerVersion(new Version(8, 0, 42))
+    ));
 
 // Add services to the container.
 
